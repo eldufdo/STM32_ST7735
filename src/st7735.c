@@ -6,7 +6,6 @@
 #include "delay.h"
 #include "st7735.h"
 #include "font5x7.h"
-#include "img.h"
 
 uint16_t scr_width;
 uint16_t scr_height;
@@ -364,22 +363,6 @@ void ST7735_PutStr5x7(uint8_t X, uint8_t Y, char *str, uint16_t color,uint16_t b
 		if (X < scr_width - (scale*5-1)) { X += (scale * 5) + 1; } else if (Y < scr_height - (scale * 7) + 1) { X = 0; Y += (scale * 7) + 1; } else { X = 0; Y = 0; }
 	};
 }
-
-void ST7735_PutImg() {
-	uint16_t row,col;
-	uint16_t color;
-	for (row = 0; row < 128; row++) {
-		for (col = 0; col < 160;col++) {
-			//unsigned char	 pixel_data[160 * 128 * 3 + 1];
-			char r = gimp_image.pixel_data[(row*160+col)*3];
-			char g = gimp_image.pixel_data[((row*160+col)*3)+1];
-			char b = gimp_image.pixel_data[((row*160+col)*3)+2];
-			color = ST7735_Color565(r,g,b);
-			ST7735_Pixel(col,row,color);
-		}
-	}
-}
-
 
 
 void ST7735_drawCircleHelper( int16_t x0, int16_t y0,int16_t r, uint8_t cornername, uint16_t color) {
